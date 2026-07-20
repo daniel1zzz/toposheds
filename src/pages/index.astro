@@ -1,17 +1,139 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard";
+import projects from "../../public/projects.json";
+import { MoveRight, MoveDown } from "@lucide/astro";
 
+const email = "andy@toposheds.com";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="TOPO Sheds & Remodeling">
+  <main class="py-18 px-4 max-w-6xl w-full h-full mx-auto">
+    <header class="text-center mb-32 w-full">
+      <img
+        src="/TOPO_Sheds_Remodeling_logo.svg"
+        alt="TOPO Logo"
+        class="w-48 mx-auto mb-12"
+      />
+      <h1
+        class="text-4xl sm:text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white"
+      >
+        Design & <span class="text-[#E9B25B]">Construction.</span>
+      </h1>
+      <div class="w-10 h-px bg-[#E9B25B] mx-auto my-8"></div>
+      <p class="text-[#A0A0A0] text-xl leading-relaxed mb-8">
+        Custom sheds and home renovations. Reliable craftsmanship built for your
+        space.
+      </p>
+
+      <a
+        href={`mailto:${email}`}
+        class="rounded-lg inline-block border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B] hover:text-[#0A0A0A] font-bold uppercase tracking-widest py-3 px-8 transition-colors duration-300"
+      >
+        Contact Us
+      </a>
+    </header>
+
+    <div class="flex justify-center mt-4 mb-22">
+      <a
+        href="#project-grid"
+        class="flex flex-col items-center group cursor-pointer"
+        aria-label="Explore Our Work"
+      >
+        <span
+          class="text-[#666] group-hover:text-[#E9B25B] text-sm font-bold uppercase tracking-[0.2em] mb-5 transition-colors duration-300"
+        >
+          Explore Our Solutions
+        </span>
+
+        <MoveDown
+          class="text-[#666] group-hover:text-[#E9B25B] transition-colors duration-300 animate-bounce"
+        />
+      </a>
+    </div>
+
+    <div class="relative w-full mb-24">
+      <!-- Contenedor con scroll horizontal -->
+      <div
+        class="flex gap-8 justify-start sm:justify-center overflow-x-auto pb-4 pr-8 scrollbar-thin scrollbar-thumb-[#E9B25B] scrollbar-track-transparent"
+      >
+        {
+          (() => {
+            let filters = ["All"];
+            filters.push(
+              ...projects
+                .map((v) => v.category.toLowerCase())
+                .filter((v, i, a) => a.indexOf(v) === i),
+            );
+
+            return filters.map((cat) => (
+              <button
+                data-filter={cat.toLowerCase()}
+                class="filter-btn shrink-0 bg-transparent text-[#666] hover:text-[#E9B25B] font-bold uppercase tracking-[0.1rem] transition-all cursor-pointer"
+              >
+                {cat}
+              </button>
+            ));
+          })()
+        }
+      </div>
+
+      <!-- Flecha indicadora: Ahora con z-50 y posición fija respecto al padre relative -->
+      <div
+        class="absolute -right-6 top-0 bottom-8 flex items-center justify-center bg-gradient-to-l from-[#0A0A0A] to-transparent pl-8 pr-2 pointer-events-none z-50 sm:hidden"
+      >
+        <MoveRight class="text-[#E9B25B] animate-pulse" size={24} />
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div
+      id="project-grid"
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12"
+    >
+      {
+        projects.map((p) => (
+          <ProjectCard
+            client:load
+            title={p.title}
+            images={p.images}
+            size={p.size || ""}
+            category={p.category}
+          />
+        ))
+      }
+    </div>
+  </main>
+
+  <!-- Script del Modal y Filtros -->
+  <script is:inline>
+    // Cerrar modal
+    document.getElementById("image-modal").addEventListener("click", (e) => {
+      e.currentTarget.classList.add("hidden");
+    });
+  </script>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll(".filter-btn");
+  const cards = document.querySelectorAll(".project-item");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filterValue = button.getAttribute("data-filter");
+
+      // Change buttons color
+      buttons.forEach((btn) => btn.classList.remove("text-[#E9B25B]"));
+      button.classList.add("text-[#E9B25B]");
+
+      // Filter cards by category
+      cards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category");
+
+        if (filterValue === "all" || filterValue === cardCategory)
+          (card as HTMLElement).style.display = "block";
+        else (card as HTMLElement).style.display = "none";
+      });
+    });
+  });
+</script>

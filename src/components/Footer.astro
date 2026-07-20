@@ -1,0 +1,30 @@
+---
+const year = new Date().getFullYear();
+const email = "andy@toposheds.com";
+---
+
+<footer class="bg-[#0A0A0A] border-t border-[#111] py-12 px-8">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    
+    <!-- Logo, Nombre y Correo -->
+    <div class="text-center md:text-left flex flex-col items-center md:items-start">
+      <h2 class="font-['Montserrat'] font-bold text-2xl text-white tracking-tighter">TOPO</h2>
+      <p class="text-[#666] text-sm mt-1">Sheds & Remodeling LLC</p>
+      <a href={`mailto:${email}`} class="text-[#E9B25B] hover:text-white text-sm mt-4 transition-colors">
+        {email}
+      </a>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="flex gap-8">
+      <a href="#" class="text-[#666] hover:text-[#E9B25B] font-['Inter'] text-sm uppercase tracking-widest transition-colors">Projects</a>
+      <a href="#" class="text-[#666] hover:text-[#E9B25B] font-['Inter'] text-sm uppercase tracking-widest transition-colors">Services</a>
+      <a href={`mailto:${email}`} class="text-[#666] hover:text-[#E9B25B] font-['Inter'] text-sm uppercase tracking-widest transition-colors">Contact</a>
+    </nav>
+
+    <!-- Copyright -->
+    <div class="text-[#444] text-xs font-['Inter'] text-center md:text-right">
+      &copy; {year} TOPO LLC. All rights reserved.
+    </div>
+  </div>
+</footer>
