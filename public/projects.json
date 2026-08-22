@@ -9,7 +9,8 @@
       "/projects/sheds/w1/comp/4.webp",
       "/projects/sheds/w1/comp/5.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Seminole Model",
@@ -21,7 +22,8 @@
       "/projects/sheds/w2/comp/IMG_2734.webp",
       "/projects/sheds/w2/comp/IMG_2735.webp"
     ],
-    "size": "10x10 ft"
+    "size": "10x10 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Lean to\" Model",
@@ -33,7 +35,8 @@
       "/projects/sheds/w3/comp/IMG_3456.webp",
       "/projects/sheds/w3/comp/IMG_3458.webp"
     ],
-    "size": "--"
+    "size": "--",
+    "model": "Lean to Model"
   },
   {
     "title": "Seminole Model",
@@ -42,7 +45,8 @@
       "/projects/sheds/w4/comp/IMG_20220719_120809.webp",
       "/projects/sheds/w4/comp/IMG_20220719_120814.webp"
     ],
-    "size": "8x12 ft"
+    "size": "8x12 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Gator Model",
@@ -52,7 +56,8 @@
       "/projects/sheds/w5/comp/IMG_20220801_133429.webp",
       "/projects/sheds/w5/comp/IMG_20220801_133436.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Lean to\" Model - Side Wall",
@@ -61,7 +66,8 @@
       "/projects/sheds/w6/comp/IMG_2683.webp",
       "/projects/sheds/w6/comp/IMG_2685.webp"
     ],
-    "size": "4x8 ft"
+    "size": "4x8 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Enclosed Back Terrace",
@@ -80,7 +86,8 @@
       "/projects/sheds/w8/comp/IMG_2905.webp",
       "/projects/sheds/w8/comp/IMG_2906.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Buccaneer Model",
@@ -89,7 +96,8 @@
       "/projects/sheds/w9/comp/IMG_3074.webp",
       "/projects/sheds/w9/comp/IMG_3075.webp"
     ],
-    "size": "12x8 ft"
+    "size": "12x8 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Opened Front Porch",
@@ -109,7 +117,8 @@
       "/projects/sheds/w11/comp/IMG_3224.webp",
       "/projects/sheds/w11/comp/IMG_3225.webp"
     ],
-    "size": "12x16 ft"
+    "size": "12x16 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Buccaneer Model",
@@ -117,7 +126,8 @@
     "images": [
       "/projects/sheds/w12/comp/IMG_3249.webp"
     ],
-    "size": "10x10 ft"
+    "size": "10x10 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Backyard roof",
@@ -137,7 +147,8 @@
       "/projects/sheds/w14/comp/IMG_3512.webp",
       "/projects/sheds/w14/comp/IMG_3513.webp"
     ],
-    "size": "8x6 ft"
+    "size": "8x6 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Buccaneer Model",
@@ -145,7 +156,8 @@
     "images": [
       "/projects/sheds/w15/comp/IMG_20220823_113953.webp"
     ],
-    "size": "7x16 ft"
+    "size": "7x16 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Lean to\" Model",
@@ -153,7 +165,8 @@
     "images": [
       "/projects/sheds/w16/comp/IMG_0457.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Lean to\" Model",
@@ -161,7 +174,8 @@
     "images": [
       "/projects/sheds/w17/comp/IMG_2670.webp"
     ],
-    "size": "8x10 ft"
+    "size": "8x10 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Lean to\" Model - Side Wall",
@@ -169,7 +183,8 @@
     "images": [
       "/projects/sheds/w18/comp/IMG_3740.webp"
     ],
-    "size": "5x10 ft"
+    "size": "5x10 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Buccaneer Model",
@@ -177,7 +192,8 @@
     "images": [
       "/projects/sheds/w19/comp/IMG_20220527_154007.webp"
     ],
-    "size": "8x12 ft"
+    "size": "8x12 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Gator Model",
@@ -185,7 +201,8 @@
     "images": [
       "/projects/sheds/w20/comp/IMG_20220608_132410.webp"
     ],
-    "size": "8x10 ft"
+    "size": "8x10 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Buccaneer Model",
@@ -193,7 +210,8 @@
     "images": [
       "/projects/sheds/w21/comp/IMG_20220726_144138.webp"
     ],
-    "size": "8x10 ft"
+    "size": "8x10 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Seminole Model",
@@ -202,7 +220,8 @@
       "/projects/sheds/w22/comp/IMG_20220826_113757.webp",
       "/projects/sheds/w22/comp/IMG_20220826_113802.webp"
     ],
-    "size": "12x10 ft"
+    "size": "12x10 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Buccaneer Model",
@@ -210,7 +229,8 @@
     "images": [
       "/projects/sheds/w23/comp/IMG_20220905_191355.webp"
     ],
-    "size": "14x20 ft"
+    "size": "14x20 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -219,7 +239,8 @@
       "/projects/sheds/w24/comp/IMG_20220907_140323.webp",
       "/projects/sheds/w24/comp/IMG_20220907_164226.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -227,7 +248,8 @@
     "images": [
       "/projects/sheds/w25/comp/IMG_20220909_115716.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Lean to\" Model",
@@ -235,7 +257,8 @@
     "images": [
       "/projects/sheds/w26/comp/IMG_20220921_112544.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Gator Model",
@@ -243,7 +266,8 @@
     "images": [
       "/projects/sheds/w27/comp/IMG_20220806_152141.webp"
     ],
-    "size": "12x12 ft"
+    "size": "12x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Seminole Model",
@@ -251,7 +275,8 @@
     "images": [
       "/projects/sheds/w28/comp/IMG_20220909_144056.webp"
     ],
-    "size": "8x4 ft"
+    "size": "8x4 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Gator Model",
@@ -259,7 +284,8 @@
     "images": [
       "/projects/sheds/w29/comp/IMG_20220915_121159.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Buccaneer Model",
@@ -267,7 +293,8 @@
     "images": [
       "/projects/sheds/w30/comp/IMG_20220926_175144.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -275,7 +302,8 @@
     "images": [
       "/projects/sheds/w31/comp/IMG_20221019_122830.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -284,7 +312,8 @@
       "/projects/sheds/w32/comp/IMG_20221208_104403.webp",
       "/projects/sheds/w32/comp/IMG_20221208_104412.webp"
     ],
-    "size": "10x32 ft"
+    "size": "10x32 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -292,7 +321,8 @@
     "images": [
       "/projects/sheds/w33/comp/IMG_20220823_114016.webp"
     ],
-    "size": "8x12 ft"
+    "size": "8x12 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -300,7 +330,8 @@
     "images": [
       "/projects/sheds/w34/comp/IMG_20221014_165451.webp"
     ],
-    "size": "12x32 ft"
+    "size": "12x32 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Seminole Model",
@@ -308,7 +339,8 @@
     "images": [
       "/projects/sheds/w35/comp/IMG_20221123_161332.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Gator Model",
@@ -316,7 +348,8 @@
     "images": [
       "/projects/sheds/w36/comp/IMG_20230104_160335.webp"
     ],
-    "size": "16x12 ft"
+    "size": "16x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Seminole Model",
@@ -324,7 +357,8 @@
     "images": [
       "/projects/sheds/w37/comp/IMG_20230110_144441.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Gator Model",
@@ -332,7 +366,8 @@
     "images": [
       "/projects/sheds/w38/comp/IMG_20230112_154535.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Gator Model",
@@ -341,7 +376,8 @@
       "/projects/sheds/w39/comp/IMG_20230223_103905.webp",
       "/projects/sheds/w39/comp/IMG_20230223_103914.webp"
     ],
-    "size": "10x10 ft"
+    "size": "10x10 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Lean to\" Model",
@@ -350,7 +386,8 @@
       "/projects/sheds/w40/comp/IMG_20230308_184434.webp",
       "/projects/sheds/w40/comp/IMG_20230308_184513.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Seminole Model",
@@ -359,7 +396,8 @@
       "/projects/sheds/w41/comp/IMG_20230330_110348.webp",
       "/projects/sheds/w41/comp/IMG_20230330_110409.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Seminole Model",
@@ -368,7 +406,8 @@
       "/projects/sheds/w42/comp/IMG_20230406_125931.webp",
       "/projects/sheds/w42/comp/IMG_20230406_130008.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Seminole Model",
@@ -377,7 +416,8 @@
       "/projects/sheds/w43/comp/IMG_20230411_111832.webp",
       "/projects/sheds/w43/comp/IMG_20230411_111842.webp"
     ],
-    "size": "4x4 ft"
+    "size": "4x4 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Buccaneer Model",
@@ -386,7 +426,8 @@
       "/projects/sheds/w44/comp/IMG_20230425_124130.webp",
       "/projects/sheds/w44/comp/IMG_20230425_124154.webp"
     ],
-    "size": "12x10 ft"
+    "size": "12x10 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -395,7 +436,8 @@
       "/projects/sheds/w45/comp/IMG_20230503_160016.webp",
       "/projects/sheds/w45/comp/IMG_20230503_160029.webp"
     ],
-    "size": "8x10 ft"
+    "size": "8x10 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Gator Model",
@@ -404,7 +446,8 @@
       "/projects/sheds/w46/comp/IMG_20230518_141648.webp",
       "/projects/sheds/w46/comp/IMG_20230518_141721.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Buccaneer Model",
@@ -413,7 +456,8 @@
       "/projects/sheds/w47/comp/IMG_20231011_161211.webp",
       "/projects/sheds/w47/comp/IMG_20231011_161221.webp"
     ],
-    "size": "6x8 ft"
+    "size": "6x8 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Buccaneer Model",
@@ -423,7 +467,8 @@
       "/projects/sheds/w48/comp/IMG_20231004_141338.webp",
       "/projects/sheds/w48/comp/IMG_20231004_141417.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Gator Model",
@@ -432,7 +477,8 @@
       "/projects/sheds/w49/comp/IMG_20230926_160554.webp",
       "/projects/sheds/w49/comp/IMG_20230926_160601.webp"
     ],
-    "size": "6x10 ft"
+    "size": "6x10 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Buccaneer Model",
@@ -447,7 +493,8 @@
       "/projects/sheds/w50/comp/IMG_20230922_121303.webp",
       "/projects/sheds/w50/comp/IMG_20230922_121322.webp"
     ],
-    "size": "12x16 ft"
+    "size": "12x16 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Seminole Model",
@@ -458,7 +505,8 @@
       "/projects/sheds/w51/comp/IMG_20230919_161414.webp",
       "/projects/sheds/w51/comp/IMG_20230919_161416.webp"
     ],
-    "size": "10x4 ft"
+    "size": "10x4 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Gator Model",
@@ -481,7 +529,8 @@
       "/projects/sheds/w52/comp/IMG_20230915_135336.webp",
       "/projects/sheds/w52/comp/IMG_20230915_135338.webp"
     ],
-    "size": "12x32 ft"
+    "size": "12x32 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Gator Model",
@@ -490,7 +539,8 @@
       "/projects/sheds/w53/comp/IMG_20230816_161340.webp",
       "/projects/sheds/w53/comp/IMG_20230816_161344.webp"
     ],
-    "size": "8x10 ft"
+    "size": "8x10 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Lean to\" Model",
@@ -499,7 +549,8 @@
       "/projects/sheds/w54/comp/IMG_20230810_171658.webp",
       "/projects/sheds/w54/comp/IMG_20230810_171720.webp"
     ],
-    "size": "10x8 ft"
+    "size": "10x8 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Buccaneer Model",
@@ -509,7 +560,8 @@
       "/projects/sheds/w55/comp/IMG_20230808_121528.webp",
       "/projects/sheds/w55/comp/IMG_20230808_121547.webp"
     ],
-    "size": "10x14 ft"
+    "size": "10x14 ft",
+    "model": "Buccaneer Model"
   },
   {
     "title": "Lean to\" Model",
@@ -519,7 +571,8 @@
       "/projects/sheds/w56/comp/IMG_20230802_083856.webp",
       "/projects/sheds/w56/comp/IMG_20230802_083902.webp"
     ],
-    "size": "10x14 ft"
+    "size": "10x14 ft",
+    "model": "Lean to Model"
   },
   {
     "title": "Gator Model",
@@ -528,7 +581,8 @@
       "/projects/sheds/w57/comp/IMG_20230801_151839.webp",
       "/projects/sheds/w57/comp/IMG_20230801_151845.webp"
     ],
-    "size": "10x12 ft"
+    "size": "10x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Gator Model",
@@ -537,7 +591,8 @@
       "/projects/sheds/w58/comp/IMG_20230725_120519.webp",
       "/projects/sheds/w58/comp/IMG_20230725_120528.webp"
     ],
-    "size": "8x12 ft"
+    "size": "8x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Seminole Model",
@@ -546,7 +601,8 @@
       "/projects/sheds/w59/comp/IMG_20230608_161641.webp",
       "/projects/sheds/w59/comp/IMG_20230608_161654.webp"
     ],
-    "size": "14x10 ft"
+    "size": "14x10 ft",
+    "model": "Seminole Model"
   },
   {
     "title": "Gator Model",
@@ -556,7 +612,8 @@
       "/projects/sheds/w60/comp/IMG_20230519_181706.webp",
       "/projects/sheds/w60/comp/IMG_20230519_181712.webp"
     ],
-    "size": "8x12 ft"
+    "size": "8x12 ft",
+    "model": "Gator Model"
   },
   {
     "title": "Insulation",

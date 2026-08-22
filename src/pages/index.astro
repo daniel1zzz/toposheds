@@ -89,15 +89,64 @@ const email = "andy@toposheds.com";
       </div>
     </div>
 
-    <!-- Share Button -->
-    <div class="flex mb-8 mt-8">
-      <button
-        id="share-btn"
-        class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B] hover:text-[#0A0A0A] font-bold uppercase tracking-widest py-3 px-8 transition-colors duration-300"
-      >
-        <Speech class="w-5 h-5" />
-        Share
-      </button>
+    <!-- Share Button & Filters -->
+    <div class="flex items-center justify-between mb-8 mt-8 gap-4 flex-wrap">
+      <div class="flex items-center gap-4">
+        <!-- Category Filter Dropdown -->
+        <div class="relative" id="category-filter-wrapper">
+          <button
+            id="category-filter-btn"
+            class="rounded-lg inline-flex items-center gap-2 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B]/10 font-medium uppercase tracking-wider py-2 px-4 transition-colors duration-300"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span>All</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <ul
+            id="category-filter-list"
+            class="absolute top-full left-0 mt-2 w-48 bg-[#0A0A0A] border border-[#222] rounded-lg shadow-lg hidden z-50 overflow-hidden"
+            role="listbox"
+          >
+            <li role="option" data-category="all" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">All</li>
+            <li role="option" data-category="sheds" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">Sheds</li>
+            <li role="option" data-category="remodeling" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">Remodeling</li>
+            <li role="option" data-category="floors" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">Concrete & Floors</li>
+            <li role="option" data-category="bathroom" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">Bathrooms</li>
+          </ul>
+        </div>
+
+        <!-- Model Filter Dropdown (only for sheds) -->
+        <div class="relative hidden" id="model-filter-wrapper">
+          <button
+            id="model-filter-btn"
+            class="rounded-lg inline-flex items-center gap-2 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B]/10 font-medium uppercase tracking-wider py-2 px-4 transition-colors duration-300"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span>All Models</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <ul
+            id="model-filter-list"
+            class="absolute top-full left-0 mt-2 w-56 bg-[#0A0A0A] border border-[#222] rounded-lg shadow-lg hidden z-50 overflow-hidden"
+            role="listbox"
+          >
+            <li role="option" data-model="all" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">All Models</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Share Button -->
+      <div class="flex mb-0">
+        <button
+          id="share-btn"
+          class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B] hover:text-[#0A0A0A] font-bold uppercase tracking-widest py-3 px-8 transition-colors duration-300"
+        >
+          <Speech class="w-5 h-5" />
+          Share
+        </button>
+      </div>
     </div>
 
     <!-- Share Modal -->
@@ -213,6 +262,7 @@ const email = "andy@toposheds.com";
             images={p.images}
             size={p.size || ""}
             category={p.category}
+            model={p.model}
           />
         ))
       }
@@ -229,23 +279,128 @@ const email = "andy@toposheds.com";
 </Layout>
 
 <script>
-  const buttons = document.querySelectorAll(".filter-btn");
+  // Project data for filtering (injected at build time)
+  const projectsData = JSON.parse(`{JSON.stringify(projects)}`);
+
+  // Get unique models for sheds
+  const shedModels = [...new Set(projectsData
+    .filter(p => p.category === 'sheds')
+    .map(p => p.model)
+  )].sort();
+
+  // Populate model dropdown
+  const modelList = document.getElementById("model-filter-list");
+  if (modelList) {
+    shedModels.forEach(model => {
+      const li = document.createElement("li");
+      li.role = "option";
+      li.dataset.model = model;
+      li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
+      li.textContent = model;
+      modelList.appendChild(li);
+    });
+  }
+
+  // Filter state
+  let currentCategory = "all";
+  let currentModel = "all";
+
   const cards = document.querySelectorAll(".project-item");
+  const categoryBtn = document.getElementById("category-filter-btn");
+  const categoryList = document.getElementById("category-filter-list");
+  const modelBtn = document.getElementById("model-filter-btn");
+  const modelWrapper = document.getElementById("model-filter-wrapper");
+  const modelListEl = document.getElementById("model-filter-list");
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const filterValue = button.getAttribute("data-filter");
+  function applyFilters() {
+    cards.forEach((card) => {
+      const cardCategory = card.getAttribute("data-category");
+      const cardModel = card.getAttribute("data-model");
+      
+      const categoryMatch = currentCategory === "all" || currentCategory === cardCategory;
+      const modelMatch = currentModel === "all" || currentModel === cardModel;
+      
+      if (categoryMatch && modelMatch) {
+        (card as HTMLElement).style.display = "block";
+      } else {
+        (card as HTMLElement).style.display = "none";
+      }
+    });
+  }
 
-      buttons.forEach((btn) => btn.classList.remove("text-[#E9B25B]"));
-      button.classList.add("text-[#E9B25B]");
+  function updateCategoryButton(text) {
+    if (categoryBtn) {
+      const span = categoryBtn.querySelector("span");
+      if (span) span.textContent = text;
+    }
+  }
 
-      cards.forEach((card) => {
-        const cardCategory = card.getAttribute("data-category");
-        if (filterValue === "all" || filterValue === cardCategory)
-          (card as HTMLElement).style.display = "block";
-        else (card as HTMLElement).style.display = "none";
+  function updateModelButton(text) {
+    if (modelBtn) {
+      const span = modelBtn.querySelector("span");
+      if (span) span.textContent = text;
+    }
+  }
+
+  function showModelFilter(show) {
+    if (modelWrapper) {
+      if (show) modelWrapper.classList.remove("hidden");
+      else modelWrapper.classList.add("hidden");
+    }
+  }
+
+  // Category dropdown
+  if (categoryBtn && categoryList) {
+    categoryBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      categoryList.classList.toggle("hidden");
+      categoryBtn.setAttribute("aria-expanded", !categoryList.classList.contains("hidden"));
+    });
+
+    categoryList.querySelectorAll("[role=option]").forEach(option => {
+      option.addEventListener("click", () => {
+        currentCategory = option.dataset.category;
+        updateCategoryButton(option.textContent);
+        categoryList.classList.add("hidden");
+        categoryBtn.setAttribute("aria-expanded", "false");
+
+        // Reset model filter when category changes
+        currentModel = "all";
+        updateModelButton("All Models");
+
+        // Show model filter only for sheds
+        showModelFilter(currentCategory === "sheds");
+
+        applyFilters();
       });
     });
+  }
+
+  // Model dropdown
+  if (modelBtn && modelListEl) {
+    modelBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      modelListEl.classList.toggle("hidden");
+      modelBtn.setAttribute("aria-expanded", !modelListEl.classList.contains("hidden"));
+    });
+
+    modelListEl.querySelectorAll("[role=option]").forEach(option => {
+      option.addEventListener("click", () => {
+        currentModel = option.dataset.model;
+        updateModelButton(option.textContent);
+        modelListEl.classList.add("hidden");
+        modelBtn.setAttribute("aria-expanded", "false");
+        applyFilters();
+      });
+    });
+  }
+
+  // Close dropdowns on outside click
+  document.addEventListener("click", () => {
+    if (categoryList) categoryList.classList.add("hidden");
+    if (categoryBtn) categoryBtn.setAttribute("aria-expanded", "false");
+    if (modelListEl) modelListEl.classList.add("hidden");
+    if (modelBtn) modelBtn.setAttribute("aria-expanded", "false");
   });
 
   const shareBtn = document.getElementById("share-btn");

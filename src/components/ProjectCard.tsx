@@ -6,11 +6,13 @@ export default function ProjectCard({
   images,
   size,
   category,
+  model,
 }: {
   title: string;
   images: string[];
   size: string;
   category: string;
+  model?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,6 +21,7 @@ export default function ProjectCard({
       <div
         className="project-item card bg-[#111] p-4 border border-[#1a1a1a] hover:border-[#E9B25B] transition-all duration-500 cursor-pointer rounded-lg"
         data-category={category.toLowerCase()}
+        data-model={model?.toLowerCase() || ""}
         onClick={() => setIsOpen(true)}
       >
         <div className="relative w-full h-80 rounded-lg overflow-hidden mb-6 cursor-pointer">
