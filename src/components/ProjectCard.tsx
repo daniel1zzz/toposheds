@@ -24,10 +24,15 @@ export default function ProjectCard({
         <div className="relative w-full h-80 rounded-lg overflow-hidden mb-6 cursor-pointer">
           <div className="absolute inset-0 bg-[#222] animate-pulse z-0"></div>
 
-          <div
-            className="absolute inset-0 z-10 bg-cover bg-center"
-            style={{ backgroundImage: `url('${images[0] || ""}')` }}
-          ></div>
+          {images[0] && (
+            <img
+              src={images[0]}
+              alt={title}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 z-10 w-full h-full object-cover"
+            />
+          )}
         </div>
         <div className="p-2">
           <h3 className="text-2xl font-semibold text-white mb-2 font-['Montserrat']">
