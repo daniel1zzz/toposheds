@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard";
 import projects from "../../public/projects.json";
-import { MoveDown, FlagTriangleRight, Speech, X } from "@lucide/astro";
+import { MoveDown, FlagTriangleRight, Speech, X, ChevronDown } from "@lucide/astro";
 
 const email = "andy@toposheds.com";
 ---
@@ -62,12 +62,12 @@ const email = "andy@toposheds.com";
         <div class="relative" id="category-filter-wrapper">
           <button
             id="category-filter-btn"
-            class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B]/10 font-bold uppercase tracking-widest py-3 px-6 transition-colors duration-300"
+            class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B] hover:text-[#0A0A0A] font-bold uppercase tracking-widest py-3 px-8 transition-colors duration-300"
             aria-haspopup="listbox"
             aria-expanded="false"
           >
             <span>All</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <ChevronDown class="w-5 h-5" />
           </button>
           <ul
             id="category-filter-list"
@@ -86,12 +86,12 @@ const email = "andy@toposheds.com";
         <div class="relative hidden" id="model-filter-wrapper">
           <button
             id="model-filter-btn"
-            class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B]/10 font-bold uppercase tracking-widest py-3 px-6 transition-colors duration-300"
+            class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B] hover:text-[#0A0A0A] font-bold uppercase tracking-widest py-3 px-8 transition-colors duration-300"
             aria-haspopup="listbox"
             aria-expanded="false"
           >
             <span>All Models</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <ChevronDown class="w-5 h-5" />
           </button>
           <ul
             id="model-filter-list"
