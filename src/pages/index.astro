@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard";
 import projects from "../../public/projects.json";
-import { MoveRight, MoveDown, FlagTriangleRight, Speech, X } from "@lucide/astro";
+import { MoveDown, FlagTriangleRight, Speech, X } from "@lucide/astro";
 
 const email = "andy@toposheds.com";
 ---
@@ -53,40 +53,6 @@ const email = "andy@toposheds.com";
           class="text-[#666] group-hover:text-[#E9B25B] transition-colors duration-300 animate-bounce"
         />
       </a>
-    </div>
-
-    <div class="relative w-full mb-24">
-      <!-- Contenedor con scroll horizontal -->
-      <div
-        class="flex gap-8 justify-start sm:justify-center overflow-x-auto pb-4 pr-8 scrollbar-thin scrollbar-thumb-[#E9B25B] scrollbar-track-transparent"
-      >
-        {
-          (() => {
-            let filters = ["All"];
-            filters.push(
-              ...projects
-                .map((v) => v.category.toLowerCase())
-                .filter((v, i, a) => a.indexOf(v) === i),
-            );
-
-            return filters.map((cat) => (
-              <button
-                data-filter={cat.toLowerCase()}
-                class="filter-btn shrink-0 bg-transparent text-[#666] hover:text-[#E9B25B] font-bold uppercase tracking-[0.1rem] transition-all cursor-pointer"
-              >
-                {cat}
-              </button>
-            ));
-          })()
-        }
-      </div>
-
-      <!-- Flecha indicadora: Ahora con z-50 y posición fija respecto al padre relative -->
-      <div
-        class="absolute -right-6 top-0 bottom-8 flex items-center justify-center bg-gradient-to-l from-[#0A0A0A] to-transparent pl-8 pr-2 pointer-events-none z-50 sm:hidden"
-      >
-        <MoveRight class="text-[#E9B25B] animate-pulse" size={24} />
-      </div>
     </div>
 
     <!-- Share Button & Filters -->
