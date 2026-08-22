@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard";
 import projects from "../../public/projects.json";
-import { MoveRight, MoveDown } from "@lucide/astro";
+import { MoveRight, MoveDown, FlagTriangleRight, Speech, X } from "@lucide/astro";
 
 const email = "andy@toposheds.com";
 ---
@@ -18,12 +18,15 @@ const email = "andy@toposheds.com";
       <h1
         class="text-4xl sm:text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white"
       >
-        Design & <span class="text-[#E9B25B]">Construction.</span>
+        Custom Sheds & <span class="text-[#E9B25B]">Remodeling.</span>
       </h1>
       <div class="w-10 h-px bg-[#E9B25B] mx-auto my-8"></div>
-      <p class="text-[#A0A0A0] text-xl leading-relaxed mb-8">
-        Custom sheds and home renovations. Reliable craftsmanship built for your
-        space.
+      <p class="text-[#A0A0A0] text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
+        We build custom sheds, bathrooms, concrete work & remodels — any size, any style. Small to medium sheds built on-site in 1 day. Extensive experience running our own projects and working for industry companies.
+      </p>
+      <p class="text-[#E9B25B] text-base font-medium uppercase tracking-wider mb-8 flex items-center justify-center gap-2">
+        <FlagTriangleRight class="text-[#E9B25B]" size={16} />
+        Serving Tampa Bay Area
       </p>
 
       <a
@@ -86,6 +89,117 @@ const email = "andy@toposheds.com";
       </div>
     </div>
 
+    <!-- Share Button -->
+    <div class="flex mb-8 mt-8">
+      <button
+        id="share-btn"
+        class="rounded-lg inline-flex items-center gap-3 border-2 border-[#E9B25B] text-[#E9B25B] hover:bg-[#E9B25B] hover:text-[#0A0A0A] font-bold uppercase tracking-widest py-3 px-8 transition-colors duration-300"
+      >
+        <Speech class="w-5 h-5" />
+        Share
+      </button>
+    </div>
+
+    <!-- Share Modal -->
+    <div
+      id="share-modal"
+      class="fixed inset-0 z-50 hidden items-start justify-start sm:items-center sm:justify-center bg-black/80 backdrop-blur-sm"
+    >
+      <div class="bg-[#0A0A0A] border border-[#222] rounded-none p-6 max-w-none w-full mx-0 h-full sm:rounded-2xl sm:p-8 sm:max-w-md sm:mx-4 sm:h-auto sm:max-h-[90vh] overflow-y-auto shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-8">
+          <div>
+            <p class="text-[#E9B25B] text-xs uppercase tracking-widest mb-2">Share</p>
+            <h3 class="text-white font-['Montserrat'] font-bold text-xl leading-tight">TOPO Sheds & Remodeling</h3>
+            <p class="text-[#666] text-sm mt-1">Custom sheds & remodeling in Tampa Bay</p>
+          </div>
+          <button
+            id="close-share-modal"
+            class="text-[#666] hover:text-white p-1 rounded-lg hover:bg-[#1a1a1a] transition-colors"
+            aria-label="Close"
+          >
+            <X class="w-6 h-6" />
+          </button>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="w-full flex flex-col items-center gap-4 mb-8">
+          <div class="relative w-64 h-64 mx-auto" id="qr-container">
+            <img
+              id="qr-code-img"
+              src=""
+              alt="QR Code TOPO Sheds & Remodeling"
+              class="w-full h-full rounded-xl object-cover"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-20 h-20 rounded-full bg-[#0A0A0A] flex items-center justify-center shadow-lg">
+                <img
+                  src="/TOPO_Sheds_Remodeling_logo.svg"
+                  alt="TOPO Logo"
+                  class="w-14 h-14 brightness-0 invert"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="relative mb-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-[#222]" />
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="bg-[#0A0A0A] px-4 text-[#666] uppercase tracking-wider">Share via</span>
+          </div>
+        </div>
+
+<!-- Social Share Buttons -->
+        <div class="grid grid-cols-3 gap-3 mb-4">
+          <button
+            type="button"
+            onclick="handleShare('whatsapp')"
+            class="flex flex-col items-center gap-2 px-3 py-4 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 text-white text-xs font-medium hover:bg-[#25D366]/20 hover:border-[#25D366]/40 transition-all"
+          >
+            <svg class="w-6 h-6" viewBox="0 0 512 512" fill="none">
+              <rect width="512" height="512" rx="76.8" fill="#25D366"/>
+              <path fill="#25D366" stroke="#ffffff" stroke-width="26" d="M123 393l14-65a138 138 0 1150 47z"/>
+              <path fill="#ffffff" d="M308 273c-3-2-6-3-9 1l-12 16c-3 2-5 3-9 1-15-8-36-17-54-47-1-4 1-6 3-8l9-14c2-2 1-4 0-6l-12-29c-3-8-6-7-9-7h-8c-2 0-6 1-10 5-22 22-13 53 3 73 3 4 23 40 66 59 32 14 39 12 48 10 11-1 22-10 27-19 1-3 6-16 2-18"/>
+            </svg>
+            <span>WhatsApp</span>
+          </button>
+          <button
+            type="button"
+            onclick="handleShare('sms')"
+            class="flex flex-col items-center gap-2 px-3 py-4 rounded-xl bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-white text-xs font-medium hover:bg-[#3B82F6]/20 hover:border-[#3B82F6]/40 transition-all"
+          >
+            <svg class="w-6 h-6 text-[#3B82F6]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <span>Message</span>
+          </button>
+          <button
+            type="button"
+            id="copy-link-btn"
+            onclick="handleShare('copy')"
+            class="flex flex-col items-center gap-2 px-3 py-4 rounded-xl bg-[#1a1a1a] border border-[#333] text-white text-xs font-medium hover:bg-[#222] hover:border-[#444] transition-all"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            <span>View Link</span>
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-1">
+          <button
+            type="button"
+            onclick="handleShare('email')"
+            class="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-[#E9B25B]/10 border border-[#E9B25B]/30 text-[#E9B25B] text-sm font-medium hover:bg-[#E9B25B]/20 hover:border-[#E9B25B]/50 transition-all"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Email</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Grid -->
     <div
       id="project-grid"
@@ -122,18 +236,104 @@ const email = "andy@toposheds.com";
     button.addEventListener("click", () => {
       const filterValue = button.getAttribute("data-filter");
 
-      // Change buttons color
       buttons.forEach((btn) => btn.classList.remove("text-[#E9B25B]"));
       button.classList.add("text-[#E9B25B]");
 
-      // Filter cards by category
       cards.forEach((card) => {
         const cardCategory = card.getAttribute("data-category");
-
         if (filterValue === "all" || filterValue === cardCategory)
           (card as HTMLElement).style.display = "block";
         else (card as HTMLElement).style.display = "none";
       });
     });
   });
+
+  const shareBtn = document.getElementById("share-btn");
+  const shareModal = document.getElementById("share-modal");
+  const closeShareModal = document.getElementById("close-share-modal");
+
+  const shareUrl = window.location.origin + window.location.pathname + "#project-grid";
+
+  const shareData = {
+    title: "TOPO Sheds & Remodeling",
+    text: "Custom sheds, bathrooms, concrete & remodels in Tampa Bay. Built to your exact specs.",
+    url: shareUrl
+  };
+
+  function handleShare(target?: string) {
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (navigator.share && isMobile) {
+      navigator.share(shareData).catch((err) => {
+        if (err.name !== "AbortError") {
+          console.log("Web Share API failed, falling back:", err);
+        }
+      });
+      return;
+    }
+    
+    // Fallback: open modal or specific target
+    if (target === "whatsapp") {
+      window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + "\n\n" + shareData.url)}`, "_blank", "noopener,noreferrer");
+    } else if (target === "sms") {
+      window.location.href = `sms:?body=${encodeURIComponent(shareData.text + "\n\n" + shareData.url)}`;
+    } else if (target === "email") {
+      window.location.href = `mailto:?subject=${encodeURIComponent(shareData.title)}&body=${encodeURIComponent(shareData.text + "\n\n" + shareData.url)}`;
+    } else if (target === "copy") {
+      copyLink();
+    } else {
+      // Open modal
+      if (shareModal) {
+        shareModal.classList.remove("hidden");
+        shareModal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        // Update QR code with dynamic URL
+        const qrImg = document.getElementById("qr-code-img");
+        if (qrImg) {
+          qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(shareData.url)}&bgcolor=0A0A0A&color=E9B25B&qzone=2&ecc=H`;
+        }
+      }
+    }
+  }
+
+  function copyLink() {
+    const copyBtn = document.getElementById("copy-link-btn");
+    if (!copyBtn) return;
+    
+    navigator.clipboard.writeText(shareData.url).then(() => {
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Copied`;
+      copyBtn.classList.remove("bg-[#1a1a1a]", "hover:bg-[#222]", "border-[#333]");
+      copyBtn.classList.add("bg-[#25D366]", "hover:bg-[#1ebd5a]", "border-[#25D366]");
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+        copyBtn.classList.remove("bg-[#25D366]", "hover:bg-[#1ebd5a]", "border-[#25D366]");
+        copyBtn.classList.add("bg-[#1a1a1a]", "hover:bg-[#222]", "border-[#333]");
+      }, 2000);
+    }).catch(() => {
+      alert("Failed to copy link");
+    });
+  }
+
+  if (shareBtn && shareModal && closeShareModal) {
+    shareBtn.addEventListener("click", () => handleShare());
+
+    const closeModal = () => {
+      shareModal.classList.add("hidden");
+      shareModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    };
+
+    closeShareModal.addEventListener("click", closeModal);
+    shareModal.addEventListener("click", (e) => {
+      if (e.target === shareModal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !shareModal.classList.contains("hidden")) closeModal();
+    });
+  }
+
+  // Expose for inline onclick handlers
+  window.handleShare = handleShare;
+  window.copyLink = copyLink;
 </script>
