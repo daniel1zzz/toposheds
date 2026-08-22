@@ -372,7 +372,9 @@ const email = "andy@toposheds.com";
       if (modelBtn) modelBtn.setAttribute("aria-expanded", "false");
     }
   });
+</script>
 
+<script>
   const shareBtn = document.getElementById("share-btn");
   const shareModal = document.getElementById("share-modal");
   const closeShareModal = document.getElementById("close-share-modal");
@@ -461,4 +463,131 @@ const email = "andy@toposheds.com";
   // Expose for inline onclick handlers
   window.handleShare = handleShare;
   window.copyLink = copyLink;
+</script>
+
+<script>
+  // Filter initialization - runs after React components hydrate
+  function initFilters() {
+    const cards = document.querySelectorAll(".project-item");
+    const categoryBtn = document.getElementById("category-filter-btn");
+    const categoryList = document.getElementById("category-filter-list");
+    const modelBtn = document.getElementById("model-filter-btn");
+    const modelWrapper = document.getElementById("model-filter-wrapper");
+    const modelListEl = document.getElementById("model-filter-list");
+
+    if (!categoryBtn || !categoryList || !modelBtn || !modelWrapper || !modelListEl) {
+      console.log("Filter elements not found, retrying...");
+      setTimeout(initFilters, 100);
+      return;
+    }
+
+    if (cards.length === 0) {
+      console.log("No project cards found, retrying...");
+      setTimeout(initFilters, 100);
+      return;
+    }
+
+    console.log("Initializing filters with", cards.length, "cards");
+
+    let currentCategory = "all";
+    let currentModel = "all";
+
+    function applyFilters() {
+      cards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category");
+        const cardModel = card.getAttribute("data-model");
+        
+        const categoryMatch = currentCategory === "all" || currentCategory === cardCategory;
+        const modelMatch = currentModel === "all" || currentModel === cardModel;
+        
+        if (categoryMatch && modelMatch) {
+          (card as HTMLElement).style.display = "block";
+        } else {
+          (card as HTMLElement).style.display = "none";
+        }
+      });
+    }
+
+    function updateCategoryButton(text) {
+      if (categoryBtn) {
+        const span = categoryBtn.querySelector("span");
+        if (span) span.textContent = text;
+      }
+    }
+
+    function updateModelButton(text) {
+      if (modelBtn) {
+        const span = modelBtn.querySelector("span");
+        if (span) span.textContent = text;
+      }
+    }
+
+    function showModelFilter(show) {
+      if (modelWrapper) {
+        if (show) modelWrapper.classList.remove("hidden");
+        else modelWrapper.classList.add("hidden");
+      }
+    }
+
+    // Category dropdown
+    categoryBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      categoryList.classList.toggle("hidden");
+      categoryBtn.setAttribute("aria-expanded", !categoryList.classList.contains("hidden"));
+    });
+
+    categoryList.querySelectorAll("[role=option]").forEach(option => {
+      option.addEventListener("click", () => {
+        currentCategory = option.dataset.category;
+        updateCategoryButton(option.textContent);
+        categoryList.classList.add("hidden");
+        categoryBtn.setAttribute("aria-expanded", "false");
+
+        currentModel = "all";
+        updateModelButton("All Models");
+
+        showModelFilter(currentCategory === "sheds");
+
+        applyFilters();
+      });
+    });
+
+    // Model dropdown
+    modelBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      modelListEl.classList.toggle("hidden");
+      modelBtn.setAttribute("aria-expanded", !modelListEl.classList.contains("hidden"));
+    });
+
+    modelListEl.querySelectorAll("[role=option]").forEach(option => {
+      option.addEventListener("click", () => {
+        currentModel = option.dataset.model;
+        updateModelButton(option.textContent);
+        modelListEl.classList.add("hidden");
+        modelBtn.setAttribute("aria-expanded", "false");
+        applyFilters();
+      });
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener("click", (e) => {
+      if (categoryList && !categoryList.contains(e.target) && !categoryBtn.contains(e.target)) {
+        categoryList.classList.add("hidden");
+        categoryBtn.setAttribute("aria-expanded", "false");
+      }
+      if (modelListEl && !modelListEl.contains(e.target) && !modelBtn.contains(e.target)) {
+        modelListEl.classList.add("hidden");
+        modelBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    console.log("Filters initialized successfully");
+  }
+
+  // Run when DOM is ready and React components have hydrated
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFilters);
+  } else {
+    initFilters();
+  }
 </script>
