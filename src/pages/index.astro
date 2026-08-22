@@ -396,11 +396,15 @@ const email = "andy@toposheds.com";
   }
 
   // Close dropdowns on outside click
-  document.addEventListener("click", () => {
-    if (categoryList) categoryList.classList.add("hidden");
-    if (categoryBtn) categoryBtn.setAttribute("aria-expanded", "false");
-    if (modelListEl) modelListEl.classList.add("hidden");
-    if (modelBtn) modelBtn.setAttribute("aria-expanded", "false");
+  document.addEventListener("click", (e) => {
+    if (categoryList && !categoryList.contains(e.target) && !categoryBtn?.contains(e.target)) {
+      categoryList.classList.add("hidden");
+      if (categoryBtn) categoryBtn.setAttribute("aria-expanded", "false");
+    }
+    if (modelListEl && !modelListEl.contains(e.target) && !modelBtn?.contains(e.target)) {
+      modelListEl.classList.add("hidden");
+      if (modelBtn) modelBtn.setAttribute("aria-expanded", "false");
+    }
   });
 
   const shareBtn = document.getElementById("share-btn");
