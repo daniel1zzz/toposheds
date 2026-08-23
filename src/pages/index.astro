@@ -244,7 +244,7 @@ const email = "andy@toposheds.com";
   </script>
 </Layout>
 
-<script>
+<script is:inline>
   // Project data for filtering (injected at build time)
   const projectsData = JSON.parse(`{JSON.stringify(projects)}`);
 
@@ -345,7 +345,7 @@ const email = "andy@toposheds.com";
   });
 </script>
 
-<script>
+<script is:inline>
   const shareBtn = document.getElementById("share-btn");
   const shareModal = document.getElementById("share-modal");
   const closeShareModal = document.getElementById("close-share-modal");
@@ -436,7 +436,7 @@ const email = "andy@toposheds.com";
   window.copyLink = copyLink;
 </script>
 
-<script>
+<script is:inline>
   // Filter initialization - runs after React components hydrate
 function initFilters() {
     const cards = document.querySelectorAll(".project-item");
