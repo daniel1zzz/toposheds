@@ -71,7 +71,7 @@ const email = "andy@toposheds.com";
           </button>
           <ul
             id="category-filter-list"
-            class="absolute top-full left-0 mt-2 w-48 bg-[#0A0A0A] border border-[#222] rounded-lg shadow-lg hidden z-50 overflow-hidden"
+            class="absolute top-full left-0 mt-2 w-full sm:w-48 bg-[#0A0A0A] border border-[#222] rounded-lg shadow-lg hidden z-50 overflow-hidden"
             role="listbox"
           >
             <li role="option" data-category="all" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">All</li>
@@ -95,7 +95,7 @@ const email = "andy@toposheds.com";
           </button>
           <ul
             id="model-filter-list"
-            class="absolute top-full left-0 mt-2 w-56 bg-[#0A0A0A] border border-[#222] rounded-lg shadow-lg hidden z-50 overflow-hidden"
+            class="absolute top-full left-0 mt-2 w-full sm:w-56 bg-[#0A0A0A] border border-[#222] rounded-lg shadow-lg hidden z-50 overflow-hidden"
             role="listbox"
           >
             <li role="option" data-model="all" class="px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer">All Models</li>
@@ -247,25 +247,6 @@ const email = "andy@toposheds.com";
 <script>
   // Project data for filtering (injected at build time)
   const projectsData = JSON.parse(`{JSON.stringify(projects)}`);
-
-  // Get unique models for sheds
-  const shedModels = [...new Set(projectsData
-    .filter(p => p.category === 'sheds')
-    .map(p => p.model)
-  )].sort();
-
-  // Populate model dropdown
-  const modelList = document.getElementById("model-filter-list");
-  if (modelList) {
-    shedModels.forEach(model => {
-      const li = document.createElement("li");
-      li.role = "option";
-      li.dataset.model = model;
-      li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
-      li.textContent = model;
-      modelList.appendChild(li);
-    });
-  }
 
   // Filter state
   let currentCategory = "all";
@@ -467,7 +448,7 @@ const email = "andy@toposheds.com";
 
 <script>
   // Filter initialization - runs after React components hydrate
-  function initFilters() {
+function initFilters() {
     const cards = document.querySelectorAll(".project-item");
     const categoryBtn = document.getElementById("category-filter-btn");
     const categoryList = document.getElementById("category-filter-list");
@@ -580,6 +561,25 @@ const email = "andy@toposheds.com";
         modelBtn.setAttribute("aria-expanded", "false");
       }
     });
+
+    // Populate model dropdown from project data
+    const projectsData = JSON.parse(`{JSON.stringify(projects)}`);
+    const shedModels = [...new Set(projectsData
+      .filter(p => p.category === 'sheds')
+      .map(p => p.model)
+    )].sort();
+    
+    const modelList = document.getElementById("model-filter-list");
+    if (modelList) {
+      shedModels.forEach(model => {
+        const li = document.createElement("li");
+        li.role = "option";
+        li.dataset.model = model;
+        li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
+        li.textContent = model;
+        modelList.appendChild(li);
+      });
+    }
 
     console.log("Filters initialized successfully");
   }
