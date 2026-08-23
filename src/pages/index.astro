@@ -342,6 +342,24 @@ const email = "andy@toposheds.com";
     });
   }
 
+  // Populate model dropdown BEFORE attaching click listeners
+  const shedModels = [...new Set(projectsData
+    .filter(p => p.category === 'sheds')
+    .map(p => p.model)
+  )].sort();
+  
+  const modelList = document.getElementById("model-filter-list");
+  if (modelList) {
+    shedModels.forEach(model => {
+      const li = document.createElement("li");
+      li.role = "option";
+      li.dataset.model = model;
+      li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
+      li.textContent = model;
+      modelList.appendChild(li);
+    });
+  }
+
   // Close dropdowns on outside click
   document.addEventListener("click", (e) => {
     if (categoryList && !categoryList.contains(e.target) && !categoryBtn?.contains(e.target)) {
