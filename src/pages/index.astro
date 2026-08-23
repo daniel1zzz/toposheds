@@ -330,34 +330,6 @@ const email = "andy@toposheds.com";
       modelListEl.classList.toggle("hidden");
       modelBtn.setAttribute("aria-expanded", !modelListEl.classList.contains("hidden"));
     });
-
-    modelListEl.querySelectorAll("[role=option]").forEach(option => {
-      option.addEventListener("click", () => {
-        currentModel = option.dataset.model;
-        updateModelButton(option.textContent);
-        modelListEl.classList.add("hidden");
-        modelBtn.setAttribute("aria-expanded", "false");
-        applyFilters();
-      });
-    });
-  }
-
-  // Populate model dropdown BEFORE attaching click listeners
-  const shedModels = [...new Set(projectsData
-    .filter(p => p.category === 'sheds')
-    .map(p => p.model)
-  )].sort();
-  
-  const modelList = document.getElementById("model-filter-list");
-  if (modelList) {
-    shedModels.forEach(model => {
-      const li = document.createElement("li");
-      li.role = "option";
-      li.dataset.model = model;
-      li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
-      li.textContent = model;
-      modelList.appendChild(li);
-    });
   }
 
   // Close dropdowns on outside click
@@ -551,7 +523,25 @@ function initFilters() {
       });
     });
 
-    // Model dropdown
+// Populate model dropdown BEFORE attaching click listeners
+  const shedModels = [...new Set(projectsData
+    .filter(p => p.category === 'sheds')
+    .map(p => p.model)
+  )].sort();
+  
+  const modelList = document.getElementById("model-filter-list");
+  if (modelList) {
+    shedModels.forEach(model => {
+      const li = document.createElement("li");
+      li.role = "option";
+      li.dataset.model = model;
+      li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
+      li.textContent = model;
+      modelList.appendChild(li);
+    });
+  }
+
+  // Model dropdown
     modelBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       modelListEl.classList.toggle("hidden");
@@ -579,25 +569,6 @@ function initFilters() {
         modelBtn.setAttribute("aria-expanded", "false");
       }
     });
-
-    // Populate model dropdown from project data
-    const projectsData = JSON.parse(`{JSON.stringify(projects)}`);
-    const shedModels = [...new Set(projectsData
-      .filter(p => p.category === 'sheds')
-      .map(p => p.model)
-    )].sort();
-    
-    const modelList = document.getElementById("model-filter-list");
-    if (modelList) {
-      shedModels.forEach(model => {
-        const li = document.createElement("li");
-        li.role = "option";
-        li.dataset.model = model;
-        li.className = "px-4 py-2 text-white hover:bg-[#1a1a1a] cursor-pointer";
-        li.textContent = model;
-        modelList.appendChild(li);
-      });
-    }
 
     console.log("Filters initialized successfully");
   }
