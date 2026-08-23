@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Loader2, Image as ImageIcon } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 
 interface Project {
@@ -27,9 +27,32 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     title: "",
   });
 
+  const [imageLoading, setImageLoading] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearLoadTimeout = () => {
+    if (loadTimeoutRef.current) {
+      clearTimeout(loadTimeoutRef.current);
+      loadTimeoutRef.current = null;
+    }
+  };
+
+  const startLoadTimeout = () => {
+    clearLoadTimeout();
+    // Fallback: if image doesn't load/error in 10s, show error
+    loadTimeoutRef.current = setTimeout(() => {
+      if (imageLoading && !imageError) {
+        setImageLoading(false);
+        setImageError(true);
+      }
+    }, 10000);
+  };
 
   const openModal = (images: string[], title: string, initialIndex = 0) => {
     setModalState({
@@ -38,13 +61,30 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
       currentIndex: initialIndex,
       title,
     });
-    // Reset touch refs
+    setImageLoading(true);
+    setImageError(false);
     touchStartX.current = null;
     touchEndX.current = null;
+    startLoadTimeout();
   };
 
   const closeModal = () => {
     setModalState((prev) => ({ ...prev, isOpen: false }));
+    setImageLoading(false);
+    setImageError(false);
+    clearLoadTimeout();
+  };
+
+  const handleImageLoad = () => {
+    clearLoadTimeout();
+    setImageLoading(false);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    clearLoadTimeout();
+    setImageLoading(false);
+    setImageError(true);
   };
 
   const nextImage = () => {
@@ -52,6 +92,9 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
       ...prev,
       currentIndex: (prev.currentIndex + 1) % prev.images.length,
     }));
+    setImageLoading(true);
+    setImageError(false);
+    startLoadTimeout();
   };
 
   const prevImage = () => {
@@ -59,6 +102,9 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
       ...prev,
       currentIndex: (prev.currentIndex - 1 + prev.images.length) % prev.images.length,
     }));
+    setImageLoading(true);
+    setImageError(false);
+    startLoadTimeout();
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -73,17 +119,16 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     if (touchStartX.current === null || touchEndX.current === null) return;
     
     const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50; // minimum swipe distance in pixels
+    const threshold = 50;
     
     if (Math.abs(diff) > threshold) {
       if (diff > 0) {
-        nextImage(); // swipe left -> next image
+        nextImage();
       } else {
-        prevImage(); // swipe right -> previous image
+        prevImage();
       }
     }
     
-    // Reset for next swipe
     touchStartX.current = null;
     touchEndX.current = null;
   };
@@ -111,7 +156,6 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
     if (modalState.isOpen) {
       document.addEventListener('keydown', handleKeyDown);
-      // Focus the modal for keyboard navigation
       modalRef.current?.focus();
     }
 
@@ -119,6 +163,11 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [modalState.isOpen, modalState.images.length]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => clearLoadTimeout();
+  }, []);
 
   return (
     <>
@@ -156,24 +205,51 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-4 md:left-8 text-white hover:text-[#E9B25B] transition-colors"
+            className="absolute left-4 md:left-8 text-white hover:text-[#E9B25B] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Previous image"
-            disabled={modalState.images.length <= 1}
+            disabled={modalState.images.length <= 1 || imageLoading}
           >
             <ChevronLeft size={48} />
           </button>
 
           <div
-            className="flex flex-col items-center max-w-[85vw] max-h-[85vh]"
+            className="flex flex-col items-center max-w-[85vw] max-h-[85vh] relative"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
+            {imageLoading && !imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-[#111] z-10">
+                <Loader2 className="text-[#E9B25B] animate-spin" size={48} />
+              </div>
+            )}
+
+            {imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-[#111] z-10 flex-col gap-4 text-white">
+                <ImageIcon className="text-[#666]" size={64} />
+                <p className="text-center px-4">No se pudo cargar la imagen</p>
+                <button
+                  onClick={() => {
+                    setImageLoading(true);
+                    setImageError(false);
+                    startLoadTimeout();
+                  }}
+                  className="px-4 py-2 bg-[#E9B25B] text-[#0A0A0A] rounded font-medium hover:bg-[#E9B25B]/80 transition-colors"
+                >
+                  Reintentar
+                </button>
+              </div>
+            )}
+
             <img
+              key={modalState.currentIndex}
+              ref={imgRef}
               src={modalState.images[modalState.currentIndex]}
-              className="max-w-full max-h-[75vh] object-contain touch-pan-y"
+              className={`max-w-full max-h-[75vh] object-contain touch-pan-y ${imageLoading || imageError ? 'invisible' : 'visible'}`}
               alt={modalState.title}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
             />
             <h3 className="text-white text-xl md:text-2xl font-semibold mt-6 tracking-wide text-center">
               {modalState.title}
@@ -182,9 +258,9 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
           <button
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-4 md:right-8 text-white hover:text-[#E9B25B] transition-colors"
+            className="absolute right-4 md:right-8 text-white hover:text-[#E9B25B] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Next image"
-            disabled={modalState.images.length <= 1}
+            disabled={modalState.images.length <= 1 || imageLoading}
           >
             <ChevronRight size={48} />
           </button>
