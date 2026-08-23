@@ -1,13 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard";
+import ProjectsGrid from "../components/ProjectsGrid";
 import projects from "../../public/projects.json";
 import { MoveDown, FlagTriangleRight, Speech, X, ChevronDown } from "@lucide/astro";
 
 const email = "andy@toposheds.com";
+const projectsDataAttr = JSON.stringify(projects);
 ---
 
-<Layout title="TOPO Sheds & Remodeling">
+<Layout title="TOPO Sheds & Remodeling" projectsData={projectsDataAttr}>
   <main class="py-18 px-4 max-w-6xl w-full h-full mx-auto">
     <header class="text-center mb-32 w-full">
       <img
@@ -216,136 +217,18 @@ const email = "andy@toposheds.com";
     </div>
 
     <!-- Grid -->
-    <div
-      id="project-grid"
-      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12"
-    >
-      {
-        projects.map((p) => (
-          <ProjectCard
-            client:visible
-            title={p.title}
-            images={p.images}
-            size={p.size || ""}
-            category={p.category}
-            model={p.model}
-          />
-        ))
-      }
-    </div>
+    <ProjectsGrid client:load projects={projects} />
   </main>
-
-  <!-- Script del Modal y Filtros -->
-  <script is:inline>
-    // Cerrar modal
-    document.getElementById("image-modal").addEventListener("click", (e) => {
-      e.currentTarget.classList.add("hidden");
-    });
-  </script>
 </Layout>
 
 <script is:inline>
   // Project data for filtering (injected at build time)
-  const projectsData = JSON.parse(`{JSON.stringify(projects)}`);
-
-  // Filter state
-  let currentCategory = "all";
-  let currentModel = "all";
-
-  const cards = document.querySelectorAll(".project-item");
-  const categoryBtn = document.getElementById("category-filter-btn");
-  const categoryList = document.getElementById("category-filter-list");
-  const modelBtn = document.getElementById("model-filter-btn");
-  const modelWrapper = document.getElementById("model-filter-wrapper");
-  const modelListEl = document.getElementById("model-filter-list");
-
-  function applyFilters() {
-    cards.forEach((card) => {
-      const cardCategory = card.getAttribute("data-category");
-      const cardModel = card.getAttribute("data-model");
-      
-      const categoryMatch = currentCategory === "all" || currentCategory === cardCategory;
-      const modelMatch = currentModel === "all" || currentModel === cardModel;
-      
-      if (categoryMatch && modelMatch) {
-        (card as HTMLElement).style.display = "block";
-      } else {
-        (card as HTMLElement).style.display = "none";
-      }
-    });
-  }
-
-  function updateCategoryButton(text) {
-    if (categoryBtn) {
-      const span = categoryBtn.querySelector("span");
-      if (span) span.textContent = text;
-    }
-  }
-
-  function updateModelButton(text) {
-    if (modelBtn) {
-      const span = modelBtn.querySelector("span");
-      if (span) span.textContent = text;
-    }
-  }
-
-  function showModelFilter(show) {
-    if (modelWrapper) {
-      if (show) modelWrapper.classList.remove("hidden");
-      else modelWrapper.classList.add("hidden");
-    }
-  }
-
-  // Category dropdown
-  if (categoryBtn && categoryList) {
-    categoryBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      categoryList.classList.toggle("hidden");
-      categoryBtn.setAttribute("aria-expanded", !categoryList.classList.contains("hidden"));
-    });
-
-    categoryList.querySelectorAll("[role=option]").forEach(option => {
-      option.addEventListener("click", () => {
-        currentCategory = option.dataset.category;
-        updateCategoryButton(option.textContent);
-        categoryList.classList.add("hidden");
-        categoryBtn.setAttribute("aria-expanded", "false");
-
-        // Reset model filter when category changes
-        currentModel = "all";
-        updateModelButton("All Models");
-
-        // Show model filter only for sheds
-        showModelFilter(currentCategory === "sheds");
-
-        applyFilters();
-      });
-    });
-  }
-
-  // Model dropdown
-  if (modelBtn && modelListEl) {
-    modelBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      modelListEl.classList.toggle("hidden");
-      modelBtn.setAttribute("aria-expanded", !modelListEl.classList.contains("hidden"));
-    });
-  }
-
-  // Close dropdowns on outside click
-  document.addEventListener("click", (e) => {
-    if (categoryList && !categoryList.contains(e.target) && !categoryBtn?.contains(e.target)) {
-      categoryList.classList.add("hidden");
-      if (categoryBtn) categoryBtn.setAttribute("aria-expanded", "false");
-    }
-    if (modelListEl && !modelListEl.contains(e.target) && !modelBtn?.contains(e.target)) {
-      modelListEl.classList.add("hidden");
-      if (modelBtn) modelBtn.setAttribute("aria-expanded", "false");
-    }
-  });
+  window.projectsData = JSON.parse(document.body.dataset.projects || '[]');
 </script>
 
-<script is:inline>
+<<<<<<< HEAD
+<script>
+  // Share functionality
   const shareBtn = document.getElementById("share-btn");
   const shareModal = document.getElementById("share-modal");
   const closeShareModal = document.getElementById("close-share-modal");
@@ -436,9 +319,10 @@ const email = "andy@toposheds.com";
   window.copyLink = copyLink;
 </script>
 
-<script is:inline>
-  // Filter initialization - runs after React components hydrate
-function initFilters() {
+<<<<<<< HEAD
+<script>
+  // Filter initialization - runs after React components have hydrated
+  function initFilters() {
     const cards = document.querySelectorAll(".project-item");
     const categoryBtn = document.getElementById("category-filter-btn");
     const categoryList = document.getElementById("category-filter-list");
@@ -469,7 +353,8 @@ function initFilters() {
         const cardModel = card.getAttribute("data-model");
         
         const categoryMatch = currentCategory === "all" || currentCategory === cardCategory;
-        const modelMatch = currentModel === "all" || currentModel === cardModel;
+        const modelMatch = currentModel === "all" || 
+          (currentModel && cardModel && currentModel.toLowerCase() === cardModel.toLowerCase());
         
         if (categoryMatch && modelMatch) {
           (card as HTMLElement).style.display = "block";
@@ -523,8 +408,8 @@ function initFilters() {
       });
     });
 
-// Populate model dropdown BEFORE attaching click listeners
-  const shedModels = [...new Set(projectsData
+  // Populate model dropdown BEFORE attaching click listeners
+  const shedModels = [...new Set(window.projectsData
     .filter(p => p.category === 'sheds')
     .map(p => p.model)
   )].sort();
@@ -573,10 +458,33 @@ function initFilters() {
     console.log("Filters initialized successfully");
   }
 
-  // Run when DOM is ready and React components have hydrated
+  // Wait for React island to hydrate by watching for project-item elements
+  function waitForHydration() {
+    const cards = document.querySelectorAll(".project-item");
+    if (cards.length > 0) {
+      initFilters();
+    } else {
+      // Use MutationObserver to wait for cards to appear
+      const observer = new MutationObserver((mutations, obs) => {
+        const cards = document.querySelectorAll(".project-item");
+        if (cards.length > 0) {
+          obs.disconnect();
+          initFilters();
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      
+      // Fallback timeout
+      setTimeout(() => {
+        obs.disconnect();
+        console.log("Filter initialization timeout");
+      }, 10000);
+    }
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initFilters);
+    document.addEventListener("DOMContentLoaded", waitForHydration);
   } else {
-    initFilters();
+    waitForHydration();
   }
 </script>

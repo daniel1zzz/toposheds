@@ -3,8 +3,9 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
+  projectsData?: string;
 }
-const { title } = Astro.props;
+const { title, projectsData } = Astro.props;
 
 const siteUrl = "https://toposheds.com";
 const ogImage = "/projects/sheds/w1/comp/1.webp";
@@ -68,7 +69,7 @@ const ogDescription = "Custom sheds, bathrooms, concrete work & remodels in Tamp
       }
     </style>
   </head>
-  <body class="antialiased">
+  <body class="antialiased" data-projects={projectsData}>
     <main class="py-24 px-6 max-w-6xl mx-auto sm:max-w-full sm:px-0">
       <slot />
     </main>
